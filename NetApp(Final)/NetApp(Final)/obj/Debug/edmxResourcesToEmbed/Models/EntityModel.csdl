@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="theflowershopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="theflowershopEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Administrators" EntityType="theflowershopModel.Administrator" />
+    <EntitySet Name="CardInformations" EntityType="theflowershopModel.CardInformation" />
+    <EntitySet Name="Customers" EntityType="theflowershopModel.Customer" />
+    <EntitySet Name="Drivers" EntityType="theflowershopModel.Driver" />
+    <EntitySet Name="OrderDetails" EntityType="theflowershopModel.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="theflowershopModel.Order" />
+    <AssociationSet Name="FK_ProductID" Association="theflowershopModel.FK_ProductID">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="CardInformation" EntitySet="CardInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Customer__3943762B" Association="theflowershopModel.FK__Orders__Customer__3943762B">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Driver" Association="theflowershopModel.FK_Driver">
+      <End Role="Driver" EntitySet="Drivers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails" Association="theflowershopModel.FK_OrderDetails">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <EntitySet Name="Products" EntityType="theflowershopModel.Product" />
+    <EntitySet Name="Suppliers" EntityType="theflowershopModel.Supplier" />
+    <AssociationSet Name="FK__OrderDeta__Produ__76177A41" Association="theflowershopModel.FK__OrderDeta__Produ__76177A41">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Supplie__770B9E7A" Association="theflowershopModel.FK__Product__Supplie__770B9E7A">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="AdministratorID" />
+    </Key>
+    <Property Name="AdministratorID" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CardInformation">
+    <Key>
+      <PropertyRef Name="CardID" />
+    </Key>
+    <Property Name="CardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Zip" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CreditCardNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ExpMonth" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ExpYear" Type="Int32" Nullable="false" />
+    <Property Name="CVV" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="theflowershopModel.FK_ProductID" FromRole="CardInformation" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CardInformations" Relationship="theflowershopModel.FK_ProductID" FromRole="Customer" ToRole="CardInformation" />
+    <NavigationProperty Name="Orders" Relationship="theflowershopModel.FK__Orders__Customer__3943762B" FromRole="Customer" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Driver">
+    <Key>
+      <PropertyRef Name="DriverID" />
+    </Key>
+    <Property Name="DriverID" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LicenseNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="DriverCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Orders" Relationship="theflowershopModel.FK_Driver" FromRole="Driver" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="DetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="theflowershopModel.FK_OrderDetails" FromRole="OrderDetail" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="theflowershopModel.FK__OrderDeta__Produ__76177A41" FromRole="OrderDetail" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DriverID" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerID" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="OrderStatus" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer" Relationship="theflowershopModel.FK__Orders__Customer__3943762B" FromRole="Order" ToRole="Customer" />
+    <NavigationProperty Name="Driver" Relationship="theflowershopModel.FK_Driver" FromRole="Order" ToRole="Driver" />
+    <NavigationProperty Name="OrderDetail" Relationship="theflowershopModel.FK_OrderDetails" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <Association Name="FK_ProductID">
+    <End Type="theflowershopModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="theflowershopModel.CardInformation" Role="CardInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="CardInformation">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Customer__3943762B">
+    <End Type="theflowershopModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="theflowershopModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Driver">
+    <End Type="theflowershopModel.Driver" Role="Driver" Multiplicity="1" />
+    <End Type="theflowershopModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="DriverID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="DriverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails">
+    <End Type="theflowershopModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="theflowershopModel.OrderDetail" Role="OrderDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="StockThreshold" Type="Int32" />
+    <Property Name="BatchQuantity" Type="Int32" />
+    <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SupplierEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="OrderDetails" Relationship="theflowershopModel.FK__OrderDeta__Produ__76177A41" FromRole="Product" ToRole="OrderDetail" />
+    <NavigationProperty Name="Supplier" Relationship="theflowershopModel.FK__Product__Supplie__770B9E7A" FromRole="Product" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierName" />
+    </Key>
+    <Property Name="SupplierName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SupplierEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="theflowershopModel.FK__Product__Supplie__770B9E7A" FromRole="Supplier" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK__OrderDeta__Produ__76177A41">
+    <End Type="theflowershopModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="theflowershopModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Supplie__770B9E7A">
+    <End Type="theflowershopModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+    <End Type="theflowershopModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierName" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SupplierName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

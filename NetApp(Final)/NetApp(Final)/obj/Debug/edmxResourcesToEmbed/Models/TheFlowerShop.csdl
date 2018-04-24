@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="theflowershopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="AdministratorID" />
+    </Key>
+    <Property Name="AdministratorID" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Surname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Phone" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Password" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" Type="String" />
+  </EntityType>
+  <EntityType Name="CardInformation">
+    <Key>
+      <PropertyRef Name="CardID" />
+    </Key>
+    <Property Name="CardID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="CustomerID" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Address" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="City" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="State" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Zip" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="CreditCardNumber" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="ExpMonth" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="ExpYear" Nullable="false" Type="Int32" />
+    <Property Name="CVV" Nullable="false" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_ProductID" FromRole="CardInformation" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Name" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Surname" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Phone" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Password" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" Type="String" />
+    <NavigationProperty Name="CardInformations" Relationship="Self.FK_ProductID" FromRole="Customer" ToRole="CardInformation" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Customer__3943762B" FromRole="Customer" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Driver">
+    <Key>
+      <PropertyRef Name="DriverID" />
+    </Key>
+    <Property Name="DriverID" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Surname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="PhoneNumber" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="LicenseNumber" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="DriverCode" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Password" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" Type="String" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Driver" FromRole="Driver" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="DetailID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="OrderID" Nullable="false" Type="Int32" />
+    <Property Name="ProductID" Nullable="false" Type="Int32" />
+    <Property Name="ProductName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Quantity" Nullable="false" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__Produ__57C7FD4B" FromRole="OrderDetails" ToRole="Product" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails" FromRole="OrderDetails" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="DriverID" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="CustomerID" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Name" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Surname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Address" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="OrderDate" Nullable="false" Type="DateTime" />
+    <Property Name="OrderStatus" MaxLength="15" FixedLength="false" Unicode="false" Type="String" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Orders__Customer__3943762B" FromRole="Orders" ToRole="Customer" />
+    <NavigationProperty Name="Driver" Relationship="Self.FK_Driver" FromRole="Orders" ToRole="Driver" />
+    <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetails" FromRole="Orders" ToRole="OrderDetails" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Nullable="false" Type="Int32" />
+    <Property Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Price" Nullable="false" Precision="6" Scale="2" Type="Decimal" />
+    <Property Name="Quantity" Nullable="false" Type="Int32" />
+    <Property Name="StockThreshold" Nullable="false" Type="Int32" />
+    <Property Name="SupplierName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Image" Nullable="false" MaxLength="Max" FixedLength="false" Type="Binary" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__57C7FD4B" FromRole="Product" ToRole="OrderDetails" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK__Product__Supplie__58BC2184" FromRole="Product" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierName" />
+    </Key>
+    <Property Name="SupplierName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Password" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" Type="String" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__Supplie__58BC2184" FromRole="Supplier" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_ProductID">
+    <End Type="Self.Customer" Multiplicity="1" Role="Customer" />
+    <End Type="Self.CardInformation" Multiplicity="*" Role="CardInformation" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="CardInformation">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Customer__3943762B">
+    <End Type="Self.Customer" Multiplicity="1" Role="Customer" />
+    <End Type="Self.Order" Multiplicity="*" Role="Orders" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Driver">
+    <End Type="Self.Driver" Multiplicity="1" Role="Driver" />
+    <End Type="Self.Order" Multiplicity="*" Role="Orders" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="DriverID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="DriverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Produ__57C7FD4B">
+    <End Type="Self.Product" Multiplicity="1" Role="Product" />
+    <End Type="Self.OrderDetail" Multiplicity="*" Role="OrderDetails" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails">
+    <End Type="Self.Order" Multiplicity="1" Role="Orders" />
+    <End Type="Self.OrderDetail" Multiplicity="0..1" Role="OrderDetails" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Supplie__58BC2184">
+    <End Type="Self.Supplier" Multiplicity="1" Role="Supplier" />
+    <End Type="Self.Product" Multiplicity="*" Role="Product" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierName" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SupplierName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="theflowershopEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Administrators" EntityType="Self.Administrator" />
+    <EntitySet Name="CardInformations" EntityType="Self.CardInformation" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Drivers" EntityType="Self.Driver" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <AssociationSet Name="FK_ProductID" Association="Self.FK_ProductID">
+      <End EntitySet="Customers" Role="Customer" />
+      <End EntitySet="CardInformations" Role="CardInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Customer__3943762B" Association="Self.FK__Orders__Customer__3943762B">
+      <End EntitySet="Customers" Role="Customer" />
+      <End EntitySet="Orders" Role="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Driver" Association="Self.FK_Driver">
+      <End EntitySet="Drivers" Role="Driver" />
+      <End EntitySet="Orders" Role="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Produ__57C7FD4B" Association="Self.FK__OrderDeta__Produ__57C7FD4B">
+      <End EntitySet="Products" Role="Product" />
+      <End EntitySet="OrderDetails" Role="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails" Association="Self.FK_OrderDetails">
+      <End EntitySet="Orders" Role="Orders" />
+      <End EntitySet="OrderDetails" Role="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Supplie__58BC2184" Association="Self.FK__Product__Supplie__58BC2184">
+      <End EntitySet="Suppliers" Role="Supplier" />
+      <End EntitySet="Products" Role="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

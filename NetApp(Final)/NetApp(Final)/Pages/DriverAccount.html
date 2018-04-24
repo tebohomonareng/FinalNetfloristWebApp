@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Driver Account</title>
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/style.css" rel="stylesheet" />
+    <link href="../../Content/sweetalert.css" rel="stylesheet" />
+    <link href="../../Content/style.css" rel="stylesheet" />
+    <link href="../../Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body ng-app="MyApp"  ng-controller="DriverTable">
+    <div class="header navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <img src="../../Content/images/logo.png" />
+            </div>
+        </div>
+        <div class="navbar navbar-default ">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <div class="container">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="../Index.html">Home</a>
+                            </li>
+                            <li><a href="../Pages/Product/Products.html">Products</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="../Pages/Account/Register.html">Login/Register</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="well text-center">Driver</h1>
+    <div class="container">
+        <div class="col-lg-6">
+            <div class="continer">
+                <form class="form-signin" method="post">
+                    <h2 class="form-signin-heading pink">Sign In</h2>
+                    <input ng-model="driverLoginEmail" type="email" class="form-control" placeholder="Email Address" name="Email" maxlength="50" required><br>
+                    <input ng-model="driverLoginPassword" type="password" class="form-control" placeholder="Password" name="Password" maxlength="12" required><br>
+                    <Button ng-click="LoginDriver()" type="button" class="btn btn-lg pink-button" id="loginButton">Login </Button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="contaier">
+                <form method="post">
+                    <h2 class="form-signin-heading pink">Create new account</h2>
+                    <input ng-model="driverID" type="text" class="form-control" placeholder="ID Number" name="id_num" maxlength="13" required>
+                    <input ng-model="driverName" type="text" class="form-control" placeholder="Name" name="name" maxlength="30" required>
+                    <input ng-model="driverSurname" type="text" class="form-control" placeholder="Surname" name="surname" maxlength="30" required>
+                    <input ng-model="driverEmail" type="text" class="form-control" placeholder="Email Address" name="email" maxlength="50" required>
+                    <input ng-model="driverPhone" type="text" class="form-control" placeholder="Phone Number" name="phonenumber" maxlength="10" required>
+                    <input ng-model="driverLicense" type="text" class="form-control" placeholder="License" name="id_num" maxlength="13" required>
+                    <input ng-model="driverCode" type="text" class="form-control" placeholder="Driver Code" name="id_num" maxlength="13" required>
+                    <input ng-model="driverPassword" type="password" class="form-control" placeholder="Password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="12" required><br />
+                    <Button type="button" ng-click="AddDriver()" class="btn btn-lg pink-button">Add Driver </Button>
+                </form>
+            </div>
+            <div id="message">
+                <h3>Password must contain the following:</h3>
+                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                <p id="number" class="invalid">A <b>number</b></p>
+                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+            </div>
+            <div id="message2">
+                <h3>Confirm Password</h3>
+                <p id="passwordlength" class="invalid">Passwords do not match</p>
+            </div>
+        </div>
+
+
+    </div>
+    <div id="snackbar">Added to cart</div>
+    <script src="/Scripts/angular.min.js"></script>
+    <script src="../../Scripts/angular-cookies.js"></script>
+    <script src="/Scripts/app.js"></script>
+    <script src="../../Scripts/Services.js"></script>
+    <script src="/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="../../Scripts/formValidation.js"></script>
+    <script src="../../Scripts/sweetalert-dev.js"></script>
+    <script src="../../Scripts/style.js"></script>
+</body>
+</html>

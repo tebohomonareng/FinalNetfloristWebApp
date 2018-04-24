@@ -1,0 +1,14 @@
+﻿CREATE TABLE [dbo].[Orders]
+(
+	[OrderID] INT IDENTITY(100,1)NOT NULL PRIMARY KEY,
+	[RecieverName] VARCHAR(50) NOT NULL,
+	[RevieverSurname] VARCHAR(50) NOT NULL,
+	[Products] VARCHAR(250) NOT NULL, 
+	[TotalAmount] DECIMAL(6,2) NOT NULL,
+	[Email] VARCHAR(50) NOT NULL PRIMARY KEY,
+	[Province] VARCHAR(20) NOT NULL,
+	[PostalCode] VARCHAR(10) NOT NULL,
+	[TrackingNumber] INT IDENTITY(0215,2) NOT NULL,
+	[OrderStatus] VARCHAR(20) DEFAULT 'Not delivered' NOT NULL, 
+	PRIMARY KEY CLUSTERED ([OrderID] ASC, [Email] ASC),
+)

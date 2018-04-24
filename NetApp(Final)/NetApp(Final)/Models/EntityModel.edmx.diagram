@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1779c8474c7743fb949047455f7bcd2a" Name="Diagram1" ZoomLevel="124">
+        <EntityTypeShape EntityType="theflowershopModel.Administrator" Width="1.5" PointX="5.5" PointY="5" />
+        <EntityTypeShape EntityType="theflowershopModel.CardInformation" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="theflowershopModel.Customer" Width="1.5" PointX="7.375" PointY="4.625" />
+        <EntityTypeShape EntityType="theflowershopModel.Driver" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="theflowershopModel.OrderDetail" Width="1.5" PointX="5.5" PointY="0.75" />
+        <EntityTypeShape EntityType="theflowershopModel.Order" Width="1.5" PointX="3.125" PointY="0.75" />
+        <AssociationConnector Association="theflowershopModel.FK_ProductID" />
+        <AssociationConnector Association="theflowershopModel.FK__Orders__Customer__3943762B" />
+        <AssociationConnector Association="theflowershopModel.FK_Driver" />
+        <AssociationConnector Association="theflowershopModel.FK_OrderDetails" />
+        <EntityTypeShape EntityType="theflowershopModel.Product" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="theflowershopModel.Supplier" Width="1.5" PointX="3.125" PointY="5.125" />
+        <AssociationConnector Association="theflowershopModel.FK__OrderDeta__Produ__76177A41" />
+        <AssociationConnector Association="theflowershopModel.FK__Product__Supplie__770B9E7A" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

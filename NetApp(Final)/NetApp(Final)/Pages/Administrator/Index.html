@@ -1,0 +1,446 @@
+﻿<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="utf-8" />
+    <title>Administrator</title>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../../Content/style.css" rel="stylesheet" />
+</head>
+<body style="padding-top:190px" ng-controller="AdminController">
+    <div class="header navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                <img class="img-responsive" src="../../Content/images/logo.png" />
+            </div>
+        </div>
+        <div class="navbar navbar-default ">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <div class="container">
+                        <ul class="nav navbar-nav">
+
+                            <li class="active"><a data-toggle="tab" href="#home">Customer</a></li>
+                            <li><a data-toggle="tab" class=" text-center" href="#menu1">Product </a></li>
+                            <li><a data-toggle="tab" class=" text-center" href="#menu2">Driver </a></li>
+                            <li><a data-toggle="tab" class=" text-center" href="#menu3">Supplier </a></li>
+                        </ul>
+
+                        <div ng-if="!name">
+
+                        </div>
+                        <div ng-if="name">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown"></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="../Pages/Account/CustomerAccount.html">Account Overview</a></li>
+                                        <li><a href="../Pages/Account/DriverAccount.html">My Orders</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href=""><i class="fa fa-user-circle-o white-icon fa-lg "></i> {{name}} </a></li>
+                                <li><a ng-click="logoutUser()"> <i class="fa fa-sign-out  white-icon fa-lg "></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <h1 class="text-center"><strong>Customers</strong></h1>
+            <div class="container-fluid">
+                <table class="table table-hover table-responsive" ng-controller="CustomerTable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Surname</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Phone</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="x in customerdetail">
+                        <td class="text-center">{{x.CustomerID}}</td>
+                        <td class="text-center">{{x.Name}}</td>
+                        <td class="text-center">{{x.Surname}}</td>
+                        <td class="text-center">{{x.Email}}</td>
+                        <td class="text-center">{{x.Phone}}</td>
+                        <td class="text-center"><Button type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#editcustomer">Edit Customer</Button></td>
+                        <td class="text-center"><Button type="button" class="btn btn-block btn-default" ng-click="DeleteCustomer(x.CustomerID)">Delete Customer </Button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <div class="container-fluid">
+                <h1 class="text-center"><strong>Products</strong></h1>
+                <div class="col-xs-4 col-xs-offset-4">
+                    <Button type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#addproduct">Add Product</Button>
+                </div>
+                <table class="table table-hover table-responsive" ng-controller="ProductTable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Supplier</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Batch Quantity</th>
+                            <th class="text-center">Image</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="product in productsData">
+                        <td class="text-center">{{product.ProductID}}</td>
+                        <td class="text-center">{{product.Name}}</td>
+                        <td class="text-center">{{product.SupplierName}}</td>
+                        <td class="text-center">{{product.Price | currency:"R"}}</td>
+                        <td class="text-center">
+                            {{product.Quantity}}
+                            <!--<div ng-if="product.Quantity >= 20">
+                                <span class="label label-success">In Stock</span>
+                            </div>
+                            <div ng-if="product.Quantity <= 10">
+                                <span class="label label-danger">Low stock!</span>
+                            </div>-->
+                        </td>
+                        <td class="text-center">{{product.BatchQuantity}}</td>
+                        <td class="text-center"><img class="img-circle" height="50px" width="50px" ng-src="data:image/jpg;base64,{{product.Image}}"></td>
+                        <td class="text-center"><Button type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#editproduct">Edit Product</Button></td>
+                        <td class="text-center"><Button type="button" class="btn btn-block btn-default" ng-click="DeleteProduct(product.ProductID)">Delete Product</Button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <h1 class="text-center"><strong>Drivers</strong></h1>
+            <div class="col-xs-4 col-xs-offset-4">
+                <Button type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#adddriver">Add Driver</Button>
+            </div>
+            <div class="container-fluid">
+
+                <table class="table table-hover table-responsive" ng-controller="DriverTable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Surname</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Phone Number</th>
+                            <th class="text-center">License Number</th>
+                            <th class="text-center">Driver Code</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="driver in driverdetail">
+                        <td class="text-center">{{driver.DriverID}}</td>
+                        <td class="text-center">{{driver.Name}}</td>
+                        <td class="text-center">{{driver.Surname}}</td>
+                        <td class="text-center">{{driver.Email}}</td>
+                        <td class="text-center">{{driver.PhoneNumber}}</td>
+                        <td class="text-center">{{driver.LicenseNumber}}</td>
+                        <td class="text-center">{{driver.DriverCode}}</td>
+                        <td class="text-center"><Button type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#editdriver" ng-click="Edit(driver.DriverID)">Edit Driver</Button></td>
+                        <td class="text-center"><Button type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#deletedriver" ng-click="DeleteDriver(driver.DriverID)">Delete Driver </Button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+            <h1 class="text-center"><strong>Supplier</strong></h1>
+            <div class="col-xs-4 col-xs-offset-4">
+                <Button type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#addsupplier">Add Supplier</Button>
+            </div>
+            <div class="container-fluid">
+
+                <table class="table table-hover table-responsive" ng-controller="DriverTable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Surname</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Phone Number</th>
+                            <th class="text-center">License Number</th>
+                            <th class="text-center">Driver Code</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="driver in driverdetail">
+                        <td class="text-center">{{driver.DriverID}}</td>
+                        <td class="text-center">{{driver.Name}}</td>
+                        <td class="text-center">{{driver.Surname}}</td>
+                        <td class="text-center">{{driver.Email}}</td>
+                        <td class="text-center">{{driver.PhoneNumber}}</td>
+                        <td class="text-center">{{driver.LicenseNumber}}</td>
+                        <td class="text-center">{{driver.DriverCode}}</td>
+                        <td class="text-center"><Button type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#editdriver" ng-click="Edit(driver.DriverID)">Edit Driver</Button></td>
+                        <td class="text-center"><Button type="button" class="btn btn-block btn-default" data-toggle="modal" data-target="#deletedriver" ng-click="DeleteDriver(driver.DriverID)">Delete Driver </Button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <!------------------------------------------------ Modals --------------------------------------------->
+    <!------------------------------------ Product ------------------------------------>
+    <!---- Add Product ---->
+    <div ng-controller="ProductTable">
+        <div id="addproduct" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Product</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input ng-model="productName" type="text" class="form-control" placeholder="Name" required>
+                            <input ng-model="productPrice" type="text" class="form-control" placeholder="Price" required>
+                            <input ng-model="productQuantity" type="text" class="form-control" placeholder="Quantity" required>
+                            <input ng-model="productBatch" type="text" class="form-control" placeholder="Batch" required>
+                            <input ng-model="productStock" type="text" class="form-control" placeholder="Stock Threshold" required>
+                            <!--<input ng-model="productSupplier" type="text" class="form-control" placeholder="Supplier" required>-->
+                            <select class="form-control" ng-model="productSupplier">
+                                <option ng-repeat="x in names">{{x.SupplierName}}</option>
+                            </select>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td class="text-center">Product Image</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="image in imagesrc track by $index">
+                                        <td class="text-center"><img ng-src="{{image.Src}}" title="{{image.Title}}" style="width:100px; height:100px" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input ng-model="productImage" type="file" class="form-control" placeholder="Phone Number" id="image" ng-files="GetImages($files)" accept="image/*" required><br />
+                            <Button type="button" ng-click="AddProduct()" class="btn add">Add Product </Button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <Button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Edit Product-->
+        <div id="editproduct" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Product</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input ng-model="productID" type="text" class="form-control" placeholder="ID" required>
+                            <input ng-model="productName" type="text" class="form-control" placeholder="Name" required>
+                            <input ng-model="productPrice" type="text" class="form-control" placeholder="Price" required>
+                            <input ng-model="productQuantity" type="text" class="form-control" placeholder="Quantity" required>
+                            <input ng-model="productStock" type="text" class="form-control" placeholder="Stock Threshold" required>
+                            <input ng-model="productSupplier" type="text" class="form-control" placeholder="Supplier" required>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td class="text-center">Product Image</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="image in imagesrc track by $index">
+                                        <td class="text-center"><img ng-src="{{image.Src}}" title="{{image.Title}}" style="width:100px; height:100px" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input ng-model="productImage" type="file" class="form-control" placeholder="Phone Number" id="image" ng-files="GetImages($files)" accept="image/*" required><br />
+                            <Button type="button" ng-click="EditProduct()" class="btn edit">Edit Product </Button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <Button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!----Delte Product ---->
+        <div id="deleteproduct" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete Product</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input ng-model="productID" type="text" class="form-control" placeholder="ID Number" id="idnumber" maxlength="13" required>
+                            <Button type="button" ng-click="DeleteProduct()" class="btn  delete">Delete Product </Button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <Button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------------------------------------ Product ------------------------------------>
+    <!------------------------------------ Customer ------------------------------------>
+    <!-- Edit Customer-->
+    <div id="editcustomer" class="modal fade" role="dialog" ng-controller="CustomerDetail">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Customer</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input ng-model="cusID" type="text" class="form-control" placeholder="ID Number" name="id_num" maxlength="13" required>
+                        <input ng-model="cusName" type="text" class="form-control" placeholder="Name" name="name" maxlength="30" required>
+                        <input ng-model="cusSurname" type="text" class="form-control" placeholder="Surname" name="surname" maxlength="30" required>
+                        <input ng-model="cusEmail" type="text" class="form-control" placeholder="Email Address" name="email" maxlength="50" required>
+                        <input ng-model="cusPhone" type="text" class="form-control" placeholder="Phone Number" name="phonenumber" maxlength="10" required>
+                        <input ng-model="cusPassword" type="password" class="form-control" placeholder="Password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="12" required><br />
+                        <Button type="button" ng-click="UpdateCustomer()" class="btn add">Edit Customer </Button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <Button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</Button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!---- Delete Customer---->
+    <div id="deletecustomer" class="modal fade" role="dialog" ng-controller="CustomerDetail">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Customer</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input ng-model="ID" type="text" class="form-control" placeholder="ID Number" id="idnumber" maxlength="13" required>
+                        <Button type="button" ng-click="DeleteCustomer()" class="btn  delete">Delete Customer </Button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <Button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</Button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!------------------------------------ Customer ------------------------------------>
+    <!------------------------------------------ Driver ------------------------------------------->
+    <!---- Add Driver---->
+    <div>
+        <div id="adddriver" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Driver</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form ng-controller="DriverTable">
+                            <input ng-model="driverID" type="text" class="form-control" placeholder="ID Number" name="id_num" maxlength="13" required>
+                            <input ng-model="driverName" type="text" class="form-control" placeholder="Name" name="name" maxlength="30" required>
+                            <input ng-model="driverSurname" type="text" class="form-control" placeholder="Surname" name="surname" maxlength="30" required>
+                            <input ng-model="driverEmail" type="text" class="form-control" placeholder="Email Address" name="email" maxlength="50" required>
+                            <input ng-model="driverPhone" type="text" class="form-control" placeholder="Phone Number" name="phonenumber" maxlength="10" required>
+                            <input ng-model="driverLicense" type="text" class="form-control" placeholder="License" name="id_num" maxlength="13" required>
+                            <input ng-model="driverCode" type="text" class="form-control" placeholder="Driver Code" name="id_num" maxlength="13" required>
+                            <input ng-model="driverPassword" type="password" class="form-control" placeholder="Password" id="password" maxlength="12" required><br />
+                            <Button type="button" ng-click="AddDriver()" class="btn add">Add Driver </Button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <Button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!---- Edit Driver---->
+        <div id="editdriver" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit Driver</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input ng-model="currentDriver.driverid" type="text" class="form-control" placeholder="ID Number" name="driverid" maxlength="13" required>
+                            <input ng-model="driverdata.name" type="text" class="form-control" placeholder="Name" name="name" maxlength="30" required>
+                            <input ng-model="driverdata.surname" type="text" class="form-control" placeholder="Surname" name="surname" maxlength="30" required>
+                            <input ng-model="driverdata.email" type="text" class="form-control" placeholder="Email Address" name="email" maxlength="50" required>
+                            <input ng-model="driverdata.phone" type="text" class="form-control" placeholder="Phone Number" name="phonenumber" maxlength="10" required>
+                            <input ng-model="driverdata.license" type="text" class="form-control" placeholder="License" name="id_num" maxlength="13" required>
+                            <input ng-model="driverdata.drivercode" type="text" class="form-control" placeholder="Driver Code" name="id_num" maxlength="13" required>
+                            <input ng-model="driverdata" type="password" class="form-control" placeholder="Password" id="password" maxlength="12" required><br />
+                            <Button type="button" ng-click="UpdateDriver(driver)" class="btn edit">Update Driver </Button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <Button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addsupplier" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Supplier</h4>
+                </div>
+                <div class="modal-body">
+                    <form ng-controller="DriverTable"> 
+                        <input ng-model="driverName" type="text" class="form-control" placeholder="Name" name="name" maxlength="30" required>
+                        <input ng-model="driverEmail" type="text" class="form-control" placeholder="Email Address" name="email" maxlength="50" required>
+                        <input ng-model="driverPassword" type="password" class="form-control" placeholder="Password" id="password" maxlength="12" required><br />
+                        <Button type="button" ng-click="AddDriver()" class="btn add">Add Driver </Button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <Button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</Button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/Scripts/angular.min.js"></script>
+    <script src="/Scripts/app.js"></script>
+    <script src="../../Scripts/angular-cookies.js"></script>
+    <script src="../../Scripts/Services.js"></script>
+    <script src="/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="../../Scripts/formValidation.js"></script>
+    <script src="../../Scripts/sweetalert-dev.js"></script>
+    <script src="../../Scripts/style.js"></script>
+
+</body>
+</html>

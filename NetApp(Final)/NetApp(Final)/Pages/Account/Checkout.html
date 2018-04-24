@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="utf-8" />
+    <title>Checkout</title>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Content/fonts/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../Content/style.css" rel="stylesheet" />
+</head>
+<body ng-controller="CheckoutController">
+    <div class="header navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <img class="img-responsive" src="../../Content/images/logo.png" />
+            </div>
+        </div>
+        <div class="navbar navbar-default ">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <div class="container">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="Index.html"><i class="fa fa-home white-icon fa-lg "></i> Home</a>
+                            </li>
+                            <li><a href="../Pages/Product/Products.html">Products</a></li>
+                        </ul>
+
+                        <div ng-if="!name">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle-o white-icon fa-lg "></i> Account <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="MyAccount.html">Customer</a></li>
+                                        <li><a href="../Pages/Account/DriverAccount.html">Driver</a></li>
+
+                                    </ul>
+                                </li>
+                                <li><a href="Account/Cart.html"> <i class="fa fa-cart-plus  white-icon fa-lg "></i>Shopping Basket <span class="badge" id="badge">{{count}}</span> </a></li>
+                            </ul>
+                        </div>
+                        <div ng-if="name">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle-o white-icon fa-lg "></i> {{name}} <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="../Pages/Account/CustomerAccount.html">Account Overview</a></li>
+                                        <li><a href="MyOrders.html">My Orders</a></li>
+
+                                    </ul>
+                                </li>
+                                <li><a ng-click="logoutUser()"> <i class="fa fa-sign-out  white-icon fa-lg "></i> Logout</a></li>
+                                <li><a href="Account/Cart.html"> <i class="fa fa-cart-plus  white-icon fa-lg "></i> Shopping Basket  <span class="badge" id="badge">{{count}}</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-50">
+                    <h3>Billing Address</h3>
+                    <p for="fname"><i class="fa fa-user"></i> Full Name</p>
+                    <input type="text" ng-model="name" id="fname" name="firstname" placeholder="John M. Doe">
+                    <p for="email"><i class="fa fa-envelope"></i> Email</p>
+                    <input type="text" id="email" ng-model="email" name="email" placeholder="john@example.com">
+                    <p for="adr"><i class="fa fa-address-card-o"></i> Address</p>
+                    <input type="text" id="adr" ng-model="address" name="address" placeholder="497 Jacob Mare Street">
+                    <p for="city"><i class="fa fa-institution"></i> City</p>
+                    <input type="text" id="city" name="city" ng-model="city" placeholder="Johannesburg">
+
+                    <div class="row">
+                        <div class="col-50">
+                            <p for="state">State</p>
+                            <input type="text" id="state" name="state" ng-model="state" placeholder="Gauteng">
+                        </div>
+                        <div class="col-50">
+                            <p for="zip">Zip</p>
+                            <input type="text" id="zip" name="zip" ng-model="zip" max="8" placeholder="1852">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-50">
+                    <h3>Payment</h3>
+                    <p for="fname">Accepted Cards</p>
+                    <div class="icon-containe">
+                        <i class="fa fa-cc-visa fa-4x" style="color:navy;"></i>
+                        <i class="fa fa-cc-amex fa-4x" style="color:blue;"></i>
+                        <i class="fa fa-cc-mastercard fa-4x" style="color:red;"></i>
+                        <i class="fa fa-cc-discover fa-4x" style="color:orange;"></i>
+                        <i class="fa fa-cc-paypal fa-4x" style="color:#012169;"></i>
+                    </div>
+                    <p for="cname">Name on Card</p>
+                    <input type="text" id="cname" name="cardname" ng-model="cardname" placeholder="John More Doe">
+                    <p for="ccnum">Credit card number</p>
+                    <input type="text" id="ccnum" name="cardnumber" maxlength="20" ng-model="cardnumber" placeholder="1111-2222-3333-4444">
+                    <p for="expmonth">Exp Month</p>
+                    <input type="text" id="expmonth" name="expmonth" ng-model="month" placeholder="September">
+
+                    <div class="row">
+                        <div class="col-50">
+                            <p for="expyear">Exp Year</p>
+                            <input type="text" id="expyear" name="expyear" maxlength="4" ng-model="year" placeholder="2018" min="2018" max="2034">
+                        </div>
+                        <div class="col-50">
+                            <p for="cvv">CVV</p>
+                            <input type="text" id="cvv" name="cvv" maxlength="3" ng-model="cvv" placeholder="352">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <Button ng-click="saveOrder()" type="button" class="btn btn-lg checkout-btn" id="loginButton">Login </Button>
+        </form>
+    </div>
+    <script src="../../Scripts/angular.min.js"></script>
+    <script src="../../Scripts/app.js"></script>
+    <script src="../../Scripts/angular-cookies.js"></script>
+    <script src="../../Scripts/Services.js"></script>
+    <script src="../../Scripts/jquery-1.9.1.min.js"></script>
+    <script src="../../Scripts/bootstrap.min.js"></script>
+    <script src="../../Scripts/style.js"></script>
+    <script>
+        $('#ccnum').keyup(function () {
+            $(this).val($(this).val().replace(/(\d{4})\-?(\d{4})\-?(\d{4})-?(\d{4})/, '$1-$2-$3-$4'))
+        });
+    </script>
+</body>
+</html>

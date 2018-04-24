@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="NetApp_Final_.WebApiConfig">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\WebApiConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.WebApiApplication">
+    <Position X="0.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Controllers.AdministratorsController">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAACAQAABAggAAAAAAAAAQAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Controllers\AdministratorsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Controllers.CardInformationsController">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAACAQAAAAAAAAAAEkAAACAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Controllers\CardInformationsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Controllers.CustomersController">
+    <Position X="9.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAABAAAAABAAAAAAACAAAAAAAADAAA=</HashCode>
+      <FileName>Controllers\CustomersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Controllers.DriversController">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAACAQBAAAAAAAAABAAAAAAIAAAAQAAAgAAAA=</HashCode>
+      <FileName>Controllers\DriversController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Controllers.OrdersController">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACQQAACAQAAAAAAAAAAAAAAAAAAIAAEAAAAAAAAA=</HashCode>
+      <FileName>Controllers\OrdersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Controllers.ProductsController" Collapsed="true">
+    <Position X="4.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAQAAACAQAAAAAAAAAAgAAAAAAAAAQAAACAAAAAA=</HashCode>
+      <FileName>Controllers\ProductsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Controllers.SupplierTablesController">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgECAQAAAABAAAAAAAAIAAAIAAAAAAAAAAAAE=</HashCode>
+      <FileName>Controllers\SupplierTablesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Models.theflowershopEntities">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAEAAAAAAEIAAAAAABAAAACAEAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\EntityModel.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Models.Administrator">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAgAAAEAAAAAQABAAAAAACAAAAIAAAAAA=</HashCode>
+      <FileName>Models\Administrator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Models.CardInformation">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEACAgAACAAAAAIAAAACAQAEAAAAAACIAAABCAAAAA=</HashCode>
+      <FileName>Models\CardInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Models.Customer">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAASAFAAAAAACAAAAIAAAAAA=</HashCode>
+      <FileName>Models\Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Models.Driver">
+    <Position X="4.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAgAAAAAAAUAQABAAAAABCAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Driver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Models.Order">
+    <Position X="0.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CBAAABAAACAAAAAAABAAAAQABAAAgAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Models.OrderDetail">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAA=</HashCode>
+      <FileName>Models\OrderDetail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Models.Product">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAAAIAAAAAAAAQAAAAAABAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetApp_Final_.Models.SupplierTable">
+    <Position X="2.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAIAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SupplierTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

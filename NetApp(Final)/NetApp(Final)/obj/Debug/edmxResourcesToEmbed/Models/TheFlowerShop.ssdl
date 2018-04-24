@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="theflowershopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="AdministratorID" />
+    </Key>
+    <Property Name="AdministratorID" Nullable="false" MaxLength="13" Type="varchar" />
+    <Property Name="Email" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Name" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Surname" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Phone" Nullable="false" MaxLength="10" Type="varchar" />
+    <Property Name="Password" Nullable="false" MaxLength="12" Type="varchar" />
+  </EntityType>
+  <EntityType Name="CardInformation">
+    <Key>
+      <PropertyRef Name="CardID" />
+    </Key>
+    <Property Name="CardID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="CustomerID" Nullable="false" MaxLength="13" Type="varchar" />
+    <Property Name="Name" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Address" Nullable="false" MaxLength="200" Type="varchar" />
+    <Property Name="City" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="State" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Zip" Nullable="false" MaxLength="20" Type="varchar" />
+    <Property Name="CreditCardNumber" Nullable="false" MaxLength="20" Type="varchar" />
+    <Property Name="ExpMonth" Nullable="false" MaxLength="10" Type="varchar" />
+    <Property Name="ExpYear" Nullable="false" Type="int" />
+    <Property Name="CVV" Nullable="false" Type="int" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Nullable="false" MaxLength="13" Type="varchar" />
+    <Property Name="Name" Nullable="false" MaxLength="30" Type="varchar" />
+    <Property Name="Surname" Nullable="false" MaxLength="30" Type="varchar" />
+    <Property Name="Email" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Phone" Nullable="false" MaxLength="10" Type="varchar" />
+    <Property Name="Password" Nullable="false" MaxLength="12" Type="varchar" />
+  </EntityType>
+  <EntityType Name="Driver">
+    <Key>
+      <PropertyRef Name="DriverID" />
+    </Key>
+    <Property Name="DriverID" Nullable="false" MaxLength="13" Type="varchar" />
+    <Property Name="Name" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Surname" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Email" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="PhoneNumber" Nullable="false" MaxLength="10" Type="varchar" />
+    <Property Name="LicenseNumber" Nullable="false" MaxLength="15" Type="varchar" />
+    <Property Name="DriverCode" Nullable="false" MaxLength="10" Type="varchar" />
+    <Property Name="Password" Nullable="false" MaxLength="12" Type="varchar" />
+  </EntityType>
+  <EntityType Name="OrderDetails">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="DetailID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="OrderID" Nullable="false" Type="int" />
+    <Property Name="ProductID" Nullable="false" Type="int" />
+    <Property Name="ProductName" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Quantity" Nullable="false" Type="int" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="DriverID" Nullable="false" MaxLength="13" Type="varchar" />
+    <Property Name="CustomerID" Nullable="false" MaxLength="13" Type="varchar" />
+    <Property Name="Name" Nullable="false" MaxLength="30" Type="varchar" />
+    <Property Name="Surname" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Email" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Address" Nullable="false" MaxLength="150" Type="varchar" />
+    <Property Name="OrderDate" Nullable="false" Type="date" />
+    <Property Name="OrderStatus" MaxLength="15" Type="varchar" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Nullable="false" Type="int" />
+    <Property Name="Name" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Price" Nullable="false" Precision="6" Scale="2" Type="decimal" />
+    <Property Name="Quantity" Nullable="false" Type="int" />
+    <Property Name="StockThreshold" Nullable="false" Type="int" />
+    <Property Name="SupplierName" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Image" Nullable="false" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierName" />
+    </Key>
+    <Property Name="SupplierName" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="Password" Nullable="false" MaxLength="12" Type="varchar" />
+  </EntityType>
+  <Association Name="FK__OrderDeta__Produ__57C7FD4B">
+    <End Type="Self.Product" Multiplicity="1" Role="Product" />
+    <End Type="Self.OrderDetails" Multiplicity="*" Role="OrderDetails" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Customer__3943762B">
+    <End Type="Self.Customer" Multiplicity="1" Role="Customer" />
+    <End Type="Self.Orders" Multiplicity="*" Role="Orders" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Supplie__58BC2184">
+    <End Type="Self.Supplier" Multiplicity="1" Role="Supplier" />
+    <End Type="Self.Product" Multiplicity="*" Role="Product" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierName" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SupplierName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Driver">
+    <End Type="Self.Driver" Multiplicity="1" Role="Driver" />
+    <End Type="Self.Orders" Multiplicity="*" Role="Orders" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="DriverID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="DriverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails">
+    <End Type="Self.Orders" Multiplicity="1" Role="Orders" />
+    <End Type="Self.OrderDetails" Multiplicity="0..1" Role="OrderDetails" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductID">
+    <End Type="Self.Customer" Multiplicity="1" Role="Customer" />
+    <End Type="Self.CardInformation" Multiplicity="*" Role="CardInformation" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="CardInformation">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="theflowershopModelStoreContainer">
+    <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CardInformation" EntityType="Self.CardInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__OrderDeta__Produ__57C7FD4B" Association="Self.FK__OrderDeta__Produ__57C7FD4B">
+      <End EntitySet="Product" Role="Product" />
+      <End EntitySet="OrderDetails" Role="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Customer__3943762B" Association="Self.FK__Orders__Customer__3943762B">
+      <End EntitySet="Customer" Role="Customer" />
+      <End EntitySet="Orders" Role="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Supplie__58BC2184" Association="Self.FK__Product__Supplie__58BC2184">
+      <End EntitySet="Supplier" Role="Supplier" />
+      <End EntitySet="Product" Role="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Driver" Association="Self.FK_Driver">
+      <End EntitySet="Driver" Role="Driver" />
+      <End EntitySet="Orders" Role="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails" Association="Self.FK_OrderDetails">
+      <End EntitySet="Orders" Role="Orders" />
+      <End EntitySet="OrderDetails" Role="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductID" Association="Self.FK_ProductID">
+      <End EntitySet="Customer" Role="Customer" />
+      <End EntitySet="CardInformation" Role="CardInformation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
